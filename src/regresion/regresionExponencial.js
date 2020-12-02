@@ -1,9 +1,6 @@
-import { index, matrix, multiply, inv, pow, log } from "mathjs";
+import { index, matrix, multiply, inv, pow, log, e } from "mathjs";
 
-const x = [1, 2, 5, 15, 25, 30, 35, 40];
-const y = [99, 95, 85, 55, 30, 24, 20, 15];
-
-const regresionExponencial = (x = [], y = [], graph = false) => {
+const regresionExponencial = (x = [], y = []) => {
 	let aux = [];
 	let rSide = [0, 0];
 	const powerArray = [];
@@ -34,8 +31,14 @@ const regresionExponencial = (x = [], y = [], graph = false) => {
 
 	const resultado = multiply(inv(aux), rSide);
 
-	resultado.subset(index([0]), pow(Math.E, resultado.get([0])));
+	resultado.subset(index([0]), pow(e, resultado.get([0])));
+
+	return {
+		coeficientes: resultado,
+		evaluar: (x) => {
+			return resultado._data[0] * pow(e, resultado._data[1] * x);
+		},
+	};
 };
 
 export { regresionExponencial };
-//regresionExponencial(x, y);

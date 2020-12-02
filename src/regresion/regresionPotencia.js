@@ -1,9 +1,6 @@
 import { matrix, log, pow, multiply, inv, index } from "mathjs";
 
-const x = [10, 20, 30, 40, 50, 60, 70, 80];
-const y = [1.06, 1.33, 1.52, 1.68, 1.81, 1.91, 2.01, 2.11];
-
-const regresionPotencia = (x = [], y = [], graph = false) => {
+const regresionPotencia = (x = [], y = []) => {
 	let aux = [];
 	let rSide = [0, 0];
 
@@ -32,7 +29,12 @@ const regresionPotencia = (x = [], y = [], graph = false) => {
 
 	resultado.subset(index([0]), pow(Math.E, resultado.get([0])));
 
-	console.log(resultado._data);
+	return {
+		coeficientes: resultado,
+		evaluar: (x) => {
+			return resultado._data[0] * pow(x, resultado._data[1]);
+		},
+	};
 };
 
-regresionPotencia(x, y);
+export { regresionPotencia };

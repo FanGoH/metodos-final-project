@@ -8,9 +8,27 @@
 </head>
 
 <body>
+    <h1>Regresión bien bien chida chida</h1>
+    <div class="controls">
+        lista de valores:
+        <input type="text" name="" id="xvalues" placeholder="x1, x2, ..., xn">
+        <input type="text" name="" id="yvalues" placeholder="y1, y2, ..., yn">
+        <input type="text" name="" id="pow" placeholder="grado">
+        <select id="regType" name="regType">
 
-    <h1> Prueba</h1>
+            <option value="polynomial">Polinomio de Grado N</option>
 
+            <option value="exponential">Exponencial</option>
+
+            <option value="potential">Potencial</option>
+
+
+        </select>
+        <button id="calcular">Go!!!!</button>
+    </div>
+    <div class="container">
+        <canvas id="chart" width="400" height="400"></canvas>
+    </div>
     <div class="target"></div>
 </body>
 
