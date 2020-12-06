@@ -38,6 +38,9 @@ const regresionExponencial = (x = [], y = []) => {
 		evaluar: (x) => {
 			return resultado._data[0] * pow(e, resultado._data[1] * x);
 		},
+		toString: `${resultado._data[0].toFixed(3)}e${(
+			resultado._data[1].toFixed(3).toString() + "x"
+		).sup()} `,
 	};
 };
 

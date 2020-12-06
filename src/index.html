@@ -8,12 +8,15 @@
 </head>
 
 <body>
-    <h1>Regresión bien bien chida chida</h1>
+    <div class="top">
+        <h1>Calculadora de Regresiones</h1>
+    </div>
     <div class="controls">
-        lista de valores:
+        Datos:
         <input type="text" name="" id="xvalues" placeholder="x1, x2, ..., xn">
         <input type="text" name="" id="yvalues" placeholder="y1, y2, ..., yn">
         <input type="text" name="" id="pow" placeholder="grado">
+        Tipo:
         <select id="regType" name="regType">
 
             <option value="polynomial">Polinomio de Grado N</option>
@@ -24,12 +27,29 @@
 
 
         </select>
-        <button id="calcular">Go!!!!</button>
+        <button id="calcular">Calcular</button>
     </div>
     <div class="container">
-        <canvas id="chart" width="400" height="400"></canvas>
+        <div class="canvasContainer">
+            <canvas id="canvas"></canvas>
+        </div>
     </div>
     <div class="target"></div>
+    <div class="container">
+        <div class="final-results">
+            <h3> El resultado de la regresion es: <span
+                    id="formula-resultado"></span></h3>
+
+            <p> Si prefiere, puede ingresar un número y ver el resultado que
+                arroja
+                bajo ésta regresión </p>
+
+            <input class="resultado-input" type="text"
+                placeholder="Ingrese su valor aqui" />
+            <p> El resultado de evaluar su número es: <span
+                    id="evaluacion-resultado"> </span> </p>
+        </div>
+    </div>
 </body>
 
 </html>

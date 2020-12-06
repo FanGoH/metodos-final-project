@@ -1,18 +1,63 @@
-// formato de datos?
+import Chart from "chart.js";
 
-// asume que el orden del polinomio es: a + bx + cx^2 + ... + dx^n
-function obtenerFuncionPolinomica(coefVector) {
-	return (x) =>
-		coefVector.reduce(
-			(prev, current, index) => prev + current * Math.pow(x, index),
-			coefVector
-		);
+const context = document.getElementById("canvas").getContext("2d");
+let currentChart = null;
+
+function clearChart() {
+	if (currentChart != null) {
+		currentChart.destroy();
+	}
 }
 
-function obtenerFuncionExponencial([a, b]) {
-	return (x) => a + Math.pow(Math.exp, b * x);
+function getFunctionPoints(fun, start, end, DPI = 100) {
+	const range = end - start;
+	const step = 1 / DPI;
+	return [...new Array(range * DPI)].map((_v, i) => ({
+		x: start + step * i,
+		y: fun(start + step * i),
+	}));
 }
 
-function obtenerFuncionPotencial([a, b]) {
-	return (x) => a + Math.pow(x, b);
+function renderChart(xValues, dataPairs, fun, type) {
+	clearChart();
+
+	const points = getFunctionPoints(
+		fun,
+		xValues[0],
+		xValues[xValues.length - 1]
+	);
+
+	currentChart = new Chart(context, {
+		type: "scatter",
+		data: {
+			labels: xValues,
+			datasets: [
+				{
+					label: "Datos",
+					data: dataPairs,
+					pointBackgroundColor: "#8a3232",
+					pointBorderColor: "#8a3232",
+					backgroundColor: "#8a3232",
+					pointHoverBorderColor: "#8a3232",
+					pointRadius: "6",
+				},
+				{
+					label: type,
+					pointBorderWidth: 0,
+					fill: false,
+					data: points,
+					type: "line",
+					showLine: true,
+					borderColor: "#2e1a21",
+					pointBackgroundColor: "#2e1a21",
+					pointBorderColor: "#2e1a21",
+					backgroundColor: "#2e1a21",
+					pointHoverBorderColor: "#2e1a21",
+				},
+			],
+		},
+		options: { legend: { labels: { fontColor: "black" } } },
+	});
 }
+
+export { renderChart, clearChart, getFunctionPoints };

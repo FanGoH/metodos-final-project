@@ -6,8 +6,21 @@ const evaluateFunction = (coefficients = [], x) => {
 	}, 0);
 };
 
-const realFunction = (coefficientes, xArray) => {};
-// close mapping of the function, delta x = 0
+const toString = (coefficientes = []) => {
+	let getX = (i) => {
+		if (i == 0) return "";
+		if (i == 1) return "x";
+		return `x${i.toString().sup()}`;
+	};
+	let getSign = (c, i) => {
+		return c < 0 ? "-" : i == 0 ? "" : "+";
+	};
+	return coefficientes._data.reduce(
+		(a, c, i) =>
+			a + ` ${getSign(c, i)} ${Math.abs(c.toFixed(3))}${getX(i)}`,
+		""
+	);
+};
 
 const regressionN = (degreeOfRegression, x = [], y = []) => {
 	let aux = [];
@@ -43,8 +56,9 @@ const regressionN = (degreeOfRegression, x = [], y = []) => {
 	const resultado = multiply(inv(aux), rSide);
 
 	return {
-		resultado,
+		coeficientes: resultado,
 		evaluar: (x) => evaluateFunction(resultado._data, x),
+		toString: toString(resultado),
 	};
 };
 

@@ -34,6 +34,9 @@ const regresionPotencia = (x = [], y = []) => {
 		evaluar: (x) => {
 			return resultado._data[0] * pow(x, resultado._data[1]);
 		},
+		toString: `${resultado._data[0].toFixed(
+			3
+		)}x${resultado._data[1].toFixed(3).toString().sup()} `,
 	};
 };
 
