@@ -6,6 +6,13 @@ import { regresionPotencia } from "./regresion/regresionPotencia";
 
 import { renderChart } from "./utils";
 
+renderChart(
+	[1, 2, 3, 4, 5],
+	[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)],
+	(x) => x,
+	"Lineal - Ejemplo"
+);
+
 const createPolynomialRegresion = (xValues, yValues, pairs, degree) => {
 	const { _coeficientes, evaluar, toString } = regressionN(
 		degree,
@@ -57,7 +64,7 @@ calcular.addEventListener("click", () => {
 		xValues,
 		yValues,
 		dataPairs,
-		parseInt(pow.value)
+		pow.value ? parseInt(pow.value) : 2
 	);
 
 	const spanResString = document.querySelector("#formula-resultado");

@@ -12,7 +12,7 @@ function clearChart() {
 function getFunctionPoints(fun, start, end, DPI = 100) {
 	const range = end - start;
 	const step = 1 / DPI;
-	return [...new Array(range * DPI)].map((_v, i) => ({
+	return [...new Array(parseInt(range * DPI))].map((_v, i) => ({
 		x: start + step * i,
 		y: fun(start + step * i),
 	}));
@@ -23,8 +23,8 @@ function renderChart(xValues, dataPairs, fun, type) {
 
 	const points = getFunctionPoints(
 		fun,
-		xValues[0],
-		xValues[xValues.length - 1]
+		Math.min(...xValues),
+		Math.max(...xValues)
 	);
 
 	currentChart = new Chart(context, {
@@ -49,6 +49,7 @@ function renderChart(xValues, dataPairs, fun, type) {
 					type: "line",
 					showLine: true,
 					borderColor: "#2e1a21",
+					pointRadius: 1,
 					pointBackgroundColor: "#2e1a21",
 					pointBorderColor: "#2e1a21",
 					backgroundColor: "#2e1a21",
